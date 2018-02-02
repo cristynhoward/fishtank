@@ -6,33 +6,12 @@ public class Bubble extends Item {
 	/** The size of the bubble, from 0 through 4. */
 	private int size = 0;
 
-	/** Smallest bubble size, when size = 0. */
-	private ArrayList<String> sizeA = new ArrayList<>();
-
-	/** Second smallest bubble size, when size = 1. */
-	private ArrayList<String> sizeB = new ArrayList<>();
-
-	/** Second largest bubble size, when size = 2. */
-	private ArrayList<String> sizeC = new ArrayList<>();
-
-	/** Smallest bubble size, when size = 3. */
-	private ArrayList<String> sizeD = new ArrayList<>();
-
-	/** Smallest bubble size, when size = 4. */
-	private ArrayList<String> sizeE = new ArrayList<>();
-
-
 	Bubble(int col, int row) {
 		super(col, row);
-		colour = Color.gray;
-
+		ArrayList<String> sizeA = new ArrayList<>();
 		sizeA.add(".");
-		sizeB.add("o");
-		sizeC.add("O");
-		sizeD.add("()");
-		sizeE.add("( )");
-
 		appearance = sizeA;
+		colour = Color.gray;
 	}
 
 	/** Makes bubble float towards surface and grow in size. */
@@ -63,24 +42,26 @@ public class Bubble extends Item {
 	 * pop and disappear!
 	 */
 	protected void grow() {
-		if (size == 0 && Math.random() < 0.3) {
-			size += 1; // size from 0 -> 1
-			appearance = sizeB; // grow from . -> o
-
-		} else if (size == 1 && Math.random() < 0.3) {
-			size += 1; // size from 1 -> 2
-			appearance = sizeC; // grow from o -> O
-
-		} else if (size == 2 && Math.random() < 0.3) {
-			size += 1; // size from 2 -> 3
-			appearance = sizeD; // grow from O -> ()
-
-		} else if (size == 3 && Math.random() < 0.3) {
-			size += 1; // size from 3 -> 4
-			appearance = sizeE; // grow from () -> ( )
-
-		} else if (size == 4 && Math.random() < 0.3) {
+		if (size == 4 && Math.random() < 0.3) {
 			Tank.tankList.remove(this);	//	pop!
+
+		} else if (Math.random() < 0.3) {
+			ArrayList<String> newApp = new ArrayList<>();
+			size += 1;
+
+			if (size == 1) {
+				newApp.add("o");
+
+			} else if (size == 2) {
+				newApp.add("O");
+
+			} else if (size == 3) {
+				newApp.add("()");
+
+			} else if (size == 4) {
+				newApp.add("( )");
+			}
+			appearance = newApp;
 		}
 	}
 
