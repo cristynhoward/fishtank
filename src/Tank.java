@@ -10,7 +10,8 @@ public class Tank {
 	/** The list of items in the fishtank. */
 	public static ArrayList<Item> tankList = new ArrayList<Item>();
 
-	protected static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
+	/** The font used to render the items in the fish tank.*/
+	private static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
 
 	/** Create the tank and it's contents, then animate the ensemble. */
 	public static void main(String[] args) {
@@ -52,38 +53,30 @@ public class Tank {
 		for (int i = 0; i < 2; i++) {
 			tankList.add(new FishAngel(0, maxX, 3, maxY));
 		}
-		for (int i = 0; i < 7; i++) {
+		for (int i = 0; i < 8; i++) {
 			tankList.add(new FishKrill(0, maxX, maxY));
 		}
 
-		int limit = (int) Math.ceil(Math.random()*75);
-		for (int i = 0; i < limit; i++) {
+		int buffer = (int)  Math.ceil(Math.random()*75);
+		for (int i = 0; i < buffer+13; i++) {
 			int len = (int) Math.floor(Math.random()*10) + 3;
 			int col = (int) Math.floor(Math.random()*maxX);
 			int row = (int) (Math.floor(Math.random()*maxY* 0.5) + maxY*0.5);
-
-			System.out.println("i = " + Integer.toString(i) + "; (c, r, l) = (" +
-					Integer.toString(col) + ", " + Integer.toString(row) + ", " +
-					Integer.toString(len) + ")");
 			tankList.add(new Seaweed(col, row, len));
 		}
 		
-		// Run the tank.
+		// Run.
 		
 		while (true) {
-			
-			if (Math.random() < 0.5) {
-				// tankList.add(new Jelly(0, maxX, maxY));
-			}
-			
-			for (int i = 0; i < tankList.size(); i++) {
-				tankList.get(i).move();
-			}
+
+		    for (int i = 0; i<tankList.size(); i++) {
+		        tankList.get(i).move();
+            }
 			
 			tankFrame.repaint();
 			
 			try {
-				Thread.sleep(200);
+				Thread.sleep(100);
 			} catch (Exception close) {
 				System.exit(0);
 			}
