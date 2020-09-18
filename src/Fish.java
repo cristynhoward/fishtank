@@ -66,11 +66,7 @@ public class Fish extends Item {
 		super((int) (Math.random() * (maxX - minX) + minX),
 				(int) (Math.random() * (maxY - minY) + minY));
 
-		if (Math.random() < 0.5) { // Initialized facing right
-			horizMove = 1;
-		} else { // Initialized facing left
-			horizMove = -1;
-		}
+		horizMove = Math.random() < 0.5 ? 1 : -1 ;
 
 		shapeRight.add("       |``~,");		// 12
 		shapeRight.add("l`-..:-`    '-,");	// 15
@@ -97,11 +93,7 @@ public class Fish extends Item {
 
 	/** Sets appearance based on indicated swimming direction. */
 	protected void setAppearanceForDirection() {
-		if (horizMove == 1) { // right
-			appearance = shapeRight;
-		} else if (horizMove == -1) { //  left
-			appearance = shapeLeft;
-		}
+		appearance = (horizMove == 1) ? shapeRight : shapeLeft;
 	}
 
 	/** Make fish swim, change direction, and blow bubbles. */
@@ -113,24 +105,21 @@ public class Fish extends Item {
 		}
 
 		// If next move will take fish out of bounds, turn.
-
 		int nextX = col + (horizMove * swimSpeed);
 		int nextY = row + (vertMove * swimSpeed);
 
-		if (nextX > (maxX - bodyLength)) { // next move to right of screen
-			horizMove = -1;	// go left
+		if (nextX > (maxX - bodyLength)) {
+			horizMove = -1;	
 			setAppearanceForDirection();
-
-		} else if (nextX < minX) { 	// next move to left of screen
-			horizMove = 1;	// go right
+		} else if (nextX < minX) { 	
+			horizMove = 1;
 			setAppearanceForDirection();
 		}
 
-		if (nextY > (maxY - appearance.size())) {	// next move below screen
-			vertMove = -1;	// go up
-
-		} else if (nextY < minY) {	// next move above screen
-			vertMove = 1;	// go down
+		if (nextY > (maxY - appearance.size())) {	
+			vertMove = -1;
+		} else if (nextY < minY) {
+			vertMove = 1;
 		}
 
 		// Move horizontally & vertically.
@@ -139,11 +128,7 @@ public class Fish extends Item {
 
 		// Possible reset of horizonal direction.
 		if (Math.random() < dirChangeProb) {
-			if (Math.random() < 0.5) {
-				horizMove = -1; // left
-			} else {
-				horizMove = 1; // right
-			}
+			horizMove = Math.random() < 0.5 ? 1 : -1 ;
 			setAppearanceForDirection();
 		}
 
