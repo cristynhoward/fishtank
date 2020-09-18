@@ -1,14 +1,10 @@
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
 /** */
 public class Item {
-
-	/** The font used to draw instances of this class. */
-	protected static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
 
 	/** This item's row coordinate. */
 	protected int row;
@@ -52,8 +48,8 @@ public class Item {
 	 */
 	protected void draw(Graphics g) {
 		g.setColor(colour);
-		g.setFont(FONT);
-		FontMetrics fm = g.getFontMetrics(FONT);
+		
+		FontMetrics fm = g.getFontMetrics(g.getFont());
 
 		int xunit = fm.charWidth('W');
 		int yunit = fm.getAscent();

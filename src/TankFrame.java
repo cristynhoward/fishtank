@@ -60,12 +60,11 @@ public class TankFrame extends JFrame {
 	 *          	the graphics context to use for painting.
 	 */
 	public void paint(Graphics graphic) {
-
-		// Paint the window the background colour.
+		
+		graphic.setFont(FONT);
 		graphic.setColor(colour);
 		graphic.fillRect(0, 0, getBounds().width, getBounds().height);
 		
-		// Tell all the fishtank items to draw themselves.
 		for (Item thing : Tank.tankList) {
 			thing.draw(graphic);
 		}
