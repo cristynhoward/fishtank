@@ -1,41 +1,17 @@
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class Tank {
-
+	
 	/** The list of items in the fishtank. */
 	public static ArrayList<Item> tankList = new ArrayList<Item>();
 
-	/** The font used to render the items in the fish tank.*/
-	private static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
-
 	/** Create the tank and it's contents, then animate the ensemble. */
 	public static void main(String[] args) {
-
-		// Instantiate & set up tankFrame.
 		
-		TankFrame tankFrame = new TankFrame(Color.white);
-		tankFrame.setSize(640, 480);
-		tankFrame.setLocation(10, 10);
-		tankFrame.setVisible(true);
-		tankFrame.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent close) {
-				System.exit(0);
-			}
-		});
-
-		// Establish tank dimensions.
+		TankFrame tankFrame = new TankFrame();
+		int maxX = tankFrame.getMaxX();
+		int maxY = tankFrame.getMaxY();
 		
-		FontMetrics fm = tankFrame.getFontMetrics(FONT);
-		int xunit = fm.charWidth('W');
-		int yunit = fm.getAscent();
-		int maxX = Math.floorDiv(tankFrame.getWidth(), xunit); // maxX = 106
-		int maxY = Math.floorDiv(tankFrame.getHeight(), yunit); // maxY = 48
-
 		// Add items to tank.
 		
 		for (int i = 0; i < 2; i++) {

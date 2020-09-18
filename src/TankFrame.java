@@ -1,5 +1,9 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JFrame;
 
 /**
@@ -10,18 +14,43 @@ public class TankFrame extends JFrame {
 	/** My Serializable id. */
 	private static final long serialVersionUID = 1409191926708912242L;
 	
+	/** The font used to render the items in the fish tank.*/
+	private static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
+	
 	/** Background colour. */
-	private Color colour;
+	private Color colour = Color.white;
 	
 	/** 
 	 * Creates a new TankFrame.
-	 * 
-	 * @param color
-	 * 				the background colour of the frame.
 	 * */
-	TankFrame(Color color) {
+	TankFrame() {
 		super();
-		colour = color;
+		
+		this.setVisible(true);
+		this.setSize(640, 480);
+		this.setLocation(10, 10);
+		
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent close) {
+				System.exit(0);
+			}
+		});
+	}
+	
+	/** 
+	 * Returns maximum value in the X dimension.
+	 * */
+	protected int getMaxX() {
+		int xunit = getFontMetrics(FONT).charWidth('W');
+		return Math.floorDiv(this.getWidth(), xunit);
+	}
+	
+	/** 
+	 * Returns maximum value in the Y dimension.
+	 * */
+	protected int getMaxY() {
+		int yunit = getFontMetrics(FONT).getAscent();
+		return Math.floorDiv(this.getHeight(), yunit);
 	}
 
 	/**
